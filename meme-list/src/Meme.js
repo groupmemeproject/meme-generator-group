@@ -1,11 +1,14 @@
 import React from "react"
 
 class Meme extends React.Component {
-    constructor() {
+    constructor(props) {
         super()
         this.state = {
+            name: props.name,
+            imgUrl: props.img,
             topText: "",
-            bottomText: ""
+            bottomText: "",
+            id: props.key
         }
         this.handleChange = this.handleChange.bind(this)
     }
@@ -19,7 +22,7 @@ class Meme extends React.Component {
         return (
             <div>
                 <h1>{this.state.topText}</h1>
-                <img src={this.props.img} alt={this.props.name} width="500px" height="500px"/>
+                <img src={this.state.imgUrl} alt={this.state.name} width="500px" height="500px"/>
                 <h1>{this.state.bottomText}</h1>
                 <form>
                     <input
@@ -37,6 +40,7 @@ class Meme extends React.Component {
                         onChange={this.handleChange}
                     />
                 </form>
+                <button onclick={this.props.save(this.state)}>Save Meme</button>
             </div>
         )
     } 

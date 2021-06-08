@@ -8,30 +8,43 @@ class App extends React.Component{
 
         this.state = {
             memes: [],
-            savedMemes: []
+            savedMemes: [],
+            apiCalled: false
         }
+        this.saveMeme = this.saveMeme.bind(this)
     }
 
     componentDidMount() {
+        return this.apiCall()
+    }
+
+    apiCall = async () => {
         axios.get("https://api.imgflip.com/get_memes")
         .then(res => res.data)
         .then(res => {
             this.setState(
                 {
-                    memes: [...res.data.memes]
+                    memes: [...res.data.memes],
+                    apiCalled: true
                 }
             )
         })
-        // .then(() => console.log(this.state.memes))
+    }
+
+    shouldComponentUpdate() {
+        if(this.state.apiCalled) {
+            return false
+        }
+        return true
     }
 
     saveMeme(newMeme) {
-        this.setState(prevState => {
-            console.log(this.state.savedMemes)
-            return {
-            savedMemes: [...prevState.savedMemes, newMeme]
-            }      
-        })
+            this.setState(prevState => {
+                console.log(this.state.savedMemes)
+                return {
+                savedMemes: [...prevState.savedMemes, newMeme]
+                }      
+            })
     }
 
 
