@@ -40,9 +40,9 @@ class App extends React.Component{
 
     render() {
         const memesArr = this.state.memes.map(meme => <Meme key={meme.id} name={meme.name} img={meme.url} save={this.saveMeme}/>)
-
+        const savedMemes = this.state.savedMemes.map(meme => <Meme key={meme.id} name={meme.name} img={meme.url} save={this.saveMeme}/>)
         const randomMeme = memesArr[Math.floor(Math.random() * memesArr.length)]
-        
+        console.log(this.state.savedMemes);
         
         return(
             <div>
