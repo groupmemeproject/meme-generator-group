@@ -41,7 +41,7 @@ class App extends React.Component{
 
     render() {
         const memesArr = this.state.memes.map(meme => <Meme key={meme.id} name={meme.name} img={meme.url} save={this.saveMeme}/>)
-        const savedMemes = this.state.savedMemes.map(meme => <SavedMeme key={meme.id} name={meme.name} img={meme.imgUrl} />)
+        const savedMemes = this.state.savedMemes.map(meme => <SavedMeme key={meme.id} name={meme.name} img={meme.imgUrl} topText={meme.topText} bottomText={meme.bottomText} />)
         const randomMeme = memesArr[Math.floor(Math.random() * memesArr.length)]
         console.log(this.state.savedMemes);
         
@@ -50,7 +50,7 @@ class App extends React.Component{
                 <div>
                     {randomMeme}
                 </div>
-                
+
                 <div>
                     {savedMemes}
                 </div>
