@@ -8,12 +8,12 @@ class Meme extends React.Component {
             imgUrl: props.img,
             topText: "",
             bottomText: "",
-            id: props.key
         }
         this.handleChange = this.handleChange.bind(this)
     }
 
     handleChange(e) {
+        //Generates Preview when typing inside of inputs
         const {name, value} = e.target
         this.setState({[name]: value})
     }
@@ -40,7 +40,7 @@ class Meme extends React.Component {
                         onChange={this.handleChange}
                     />
                 </form>
-                <button onclick={this.props.save(this.state)}>Save Meme</button>
+                <button onClick={() => {this.props.save(this.state)}}>Save Meme</button>
             </div>
         )
     } 
