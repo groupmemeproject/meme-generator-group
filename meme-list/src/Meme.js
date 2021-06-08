@@ -8,22 +8,24 @@ class Meme extends React.Component {
             imgUrl: props.img,
             topText: "",
             bottomText: "",
-            id: props.key
         }
         this.handleChange = this.handleChange.bind(this)
     }
 
     handleChange(e) {
+        //Generates Preview when typing inside of inputs
         const {name, value} = e.target
         this.setState({[name]: value})
     }
 
     render(props) {
         return (
-            <div>
-                <h1>{this.state.topText}</h1>
-                <img src={this.state.imgUrl} alt={this.state.name} width="500px" height="500px"/>
-                <h1>{this.state.bottomText}</h1>
+            <div className="outer-container">
+                <div className="meme-container">
+                    <h1 className="upper">{this.state.topText}</h1>
+                    <img className="img" src={this.state.imgUrl} alt={this.state.name} width="500px" height="500px"/>
+                    <h1 className="lower">{this.state.bottomText}</h1>
+                </div>
                 <form>
                     <input
                         type="text"
@@ -40,7 +42,7 @@ class Meme extends React.Component {
                         onChange={this.handleChange}
                     />
                 </form>
-                <button onclick={this.props.save(this.state)}>Save Meme</button>
+                <button className="button" onClick={() => {this.props.save(this.state)}}>Save Meme</button>
             </div>
         )
     } 

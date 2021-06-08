@@ -9,52 +9,57 @@ class App extends React.Component{
         this.state = {
             memes: [],
             savedMemes: [],
-            apiCalled: false
         }
         this.saveMeme = this.saveMeme.bind(this)
+        this.refreshClick = this.refreshClick.bind(this)
     }
 
     componentDidMount() {
-        return this.apiCall()
-    }
-
-    apiCall = async () => {
+        //Get Meme API
         axios.get("https://api.imgflip.com/get_memes")
         .then(res => res.data)
         .then(res => {
             this.setState(
                 {
                     memes: [...res.data.memes],
-                    apiCalled: true
                 }
             )
         })
     }
 
-    shouldComponentUpdate() {
-        if(this.state.apiCalled) {
-            return false
-        }
-        return true
-    }
-
     saveMeme(newMeme) {
+        //Function passed to Save button inside Meme Component, pushes Meme State into savedMemes arr
             this.setState(prevState => {
-                console.log(this.state.savedMemes)
                 return {
                 savedMemes: [...prevState.savedMemes, newMeme]
-                }      
+                }   
             })
     }
 
+    refreshClick(event){
+        event.preventDefault()
+        axios.get("https://api.imgflip.com/get_memes")
+        .then(res => res.data)
+        .then(res => {
+            this.setState(
+                {
+                    memes: [...res.data.memes],
+                }
+            )
+        })
+    }
 
     render() {
         const memesArr = this.state.memes.map(meme => <Meme key={meme.id} name={meme.name} img={meme.url} save={this.saveMeme}/>)
+
         const randomMeme = memesArr[Math.floor(Math.random() * memesArr.length)]
         
         return(
             <div>
                 {randomMeme}
+                <div className="refresh-div">
+                    <button className="button refresh"onClick={this.refreshClick}>New Meme</button>
+                </div>
             </div>
         )
         
