@@ -12,6 +12,7 @@ class App extends React.Component{
             savedMemes: [],
         }
         this.saveMeme = this.saveMeme.bind(this)
+        this.deleteMeme = this.deleteMeme.bind(this)
     }
 
     componentDidMount() {
@@ -36,14 +37,23 @@ class App extends React.Component{
             })
     }
 
-
+    deleteMeme(id) {
+        //Deletes saved meme by Id
+        const deletedMeme = this.state.savedMemes.filter(item => item.id !== id);
+        // console.log(deletedMeme)
+        this.setState(prevState => {
+            return {
+                savedMemes: prevState.savedMemes = [...deletedMeme]
+            }
+        })
+    }
 
 
     render() {
-        const memesArr = this.state.memes.map(meme => <Meme key={meme.id} name={meme.name} img={meme.url} save={this.saveMeme}/>)
-        const savedMemes = this.state.savedMemes.map(meme => <SavedMeme key={meme.id} name={meme.name} img={meme.imgUrl} topText={meme.topText} bottomText={meme.bottomText} />)
+        const memesArr = this.state.memes.map(meme => <Meme key={meme.id} id={meme.id} name={meme.name} img={meme.url} save={this.saveMeme}/>)
+        const savedMemes = this.state.savedMemes.map(meme => <SavedMeme key={meme.id} id={meme.id} name={meme.name} img={meme.imgUrl} topText={meme.topText} bottomText={meme.bottomText} delete={this.deleteMeme} />)
         const randomMeme = memesArr[Math.floor(Math.random() * memesArr.length)]
-        console.log(this.state.savedMemes);
+        // console.log(this.state.savedMemes);
         
         return(
             <main>
