@@ -8,6 +8,7 @@ class Meme extends React.Component {
             imgUrl: props.img,
             topText: "",
             bottomText: "",
+            id: props.id
         }
         this.handleChange = this.handleChange.bind(this)
     }
@@ -18,7 +19,7 @@ class Meme extends React.Component {
         this.setState({[name]: value})
     }
 
-    render(props) {
+    render() {
         return (
             <div className="outer-container">
                 <div className="meme-container">

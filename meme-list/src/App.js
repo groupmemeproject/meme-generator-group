@@ -1,6 +1,7 @@
 import React from "react"
 import axios from "axios"
 import Meme from "./Meme"
+import SavedMeme from './SavedMeme'
 
 class App extends React.Component{
     constructor() {
@@ -12,6 +13,8 @@ class App extends React.Component{
         }
         this.saveMeme = this.saveMeme.bind(this)
         this.refreshClick = this.refreshClick.bind(this)
+        this.deleteMeme = this.deleteMeme.bind(this)
+        this.editMeme = this.editMeme.bind(this)
     }
 
     componentDidMount() {
@@ -31,9 +34,39 @@ class App extends React.Component{
         //Function passed to Save button inside Meme Component, pushes Meme State into savedMemes arr
             this.setState(prevState => {
                 return {
-                savedMemes: [...prevState.savedMemes, newMeme]
+                savedMemes: [...prevState.savedMemes, newMeme],
                 }   
             })
+    }
+
+    deleteMeme(id) {
+        //Deletes saved meme by Id
+        const deletedMeme = this.state.savedMemes.filter(meme => meme.id !== id);
+        // console.log(deletedMeme)
+        this.setState(prevState => {
+            return {
+                savedMemes: prevState.savedMemes = [...deletedMeme]
+            }
+        })
+    }
+
+    editMeme(id, editedMeme) {
+        const edits = this.state.savedMemes.map(meme => {
+            if(meme.id === id) {
+                meme.bottomText = editedMeme.bottomText
+                meme.topText = editedMeme.topText
+                return meme
+            } 
+            return meme
+        })
+
+        // console.log(edits)
+            
+        this.setState(prevState => {
+            return {
+                savedMemes: prevState.savedMemes = [...edits]
+            }
+        })
     }
 
     refreshClick(event){
@@ -47,20 +80,27 @@ class App extends React.Component{
                 }
             )
         })
-    }
+    }  
 
     render() {
-        const memesArr = this.state.memes.map(meme => <Meme key={meme.id} name={meme.name} img={meme.url} save={this.saveMeme}/>)
-
+        const memesArr = this.state.memes.map(meme => <Meme key={Number(Math.floor(Math.random() * 1000000))} id={meme.id} name={meme.name} img={meme.url} save={this.saveMeme}/>)
+        const savedMemes = this.state.savedMemes.map(meme => <SavedMeme key={Number(Math.floor(Math.random() * 1000000))} id={meme.id} name={meme.name} img={meme.imgUrl} topText={meme.topText} bottomText={meme.bottomText} delete={this.deleteMeme} edit={this.editMeme} />)
         const randomMeme = memesArr[Math.floor(Math.random() * memesArr.length)]
+        // console.log(this.state.savedMemes);
         
         return(
-            <div>
-                {randomMeme}
-                <div className="refresh-div">
-                    <button className="button refresh"onClick={this.refreshClick}>New Meme</button>
+            <main>
+                <div>
+                    {randomMeme}
+                    <div className="refresh-div">
+                        <button className="button" onClick={this.refreshClick}>New Meme</button>
+                    </div>
                 </div>
-            </div>
+
+                <div>
+                    {savedMemes}
+                </div>
+            </main>
         )
         
     }
