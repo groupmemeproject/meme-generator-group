@@ -80,6 +80,7 @@ class App extends React.Component{
             <main>
                 <div>
                     {randomMeme}
+                    <button onClick={() => this.componentDidMount()}>New Meme</button>
                 </div>
 
                 <div>
