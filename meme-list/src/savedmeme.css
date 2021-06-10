@@ -1,0 +1,46 @@
+div {
+    text-align: center;
+}
+
+.savedMeme{
+    display: inline-block;
+    position: relative;
+    border: 2px solid black;
+    border-radius: 25px;
+    padding: 5px;
+    margin: 10px;
+}
+
+.savedMemeBox {
+    position: relative;
+    word-wrap: break-word;
+    width: 350px;
+    height: 350px;
+    margin: auto;
+}
+
+.savedH1 {
+    margin: 0;
+    padding: 0;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 2.5em;
+    color: white;
+    -webkit-text-stroke: 2.5px black;
+}
+
+.savedTop {
+    position: absolute;
+    top: 8px;
+    width: 100%;
+}
+
+.savedBottom {
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+}
+
+input {
+    margin: 10px;
+}
+

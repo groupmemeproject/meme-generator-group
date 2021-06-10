@@ -1,4 +1,6 @@
 import React from "react"
+import "./meme.css"
+
 
 class Meme extends React.Component {
     constructor(props) {
@@ -22,9 +24,13 @@ class Meme extends React.Component {
     render() {
         return (
             <div>
-                <h1>{this.state.topText}</h1>
+                <h1 className="title">MAKE YOUR MEME</h1>
+                <br />
+                <div className="memeBox">
+                <h1 className="top">{this.state.topText}</h1>
                 <img src={this.state.imgUrl} alt={this.state.name} width="500px" height="500px"/>
-                <h1>{this.state.bottomText}</h1>
+                <h1 className="bottom">{this.state.bottomText}</h1>
+                </div>
                 <form>
                     <input
                         type="text"
@@ -42,6 +48,7 @@ class Meme extends React.Component {
                     />
                 </form>
                 <button onClick={() => {this.props.save(this.state)}}>Save Meme</button>
+                <br/>
             </div>
         )
     } 

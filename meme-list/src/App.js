@@ -2,6 +2,7 @@ import React from "react"
 import axios from "axios"
 import Meme from "./Meme"
 import SavedMeme from './SavedMeme'
+import "./app.css"
 
 class App extends React.Component{
     constructor() {
@@ -82,8 +83,9 @@ class App extends React.Component{
                     {randomMeme}
                     <button onClick={() => this.componentDidMount()}>New Meme</button>
                 </div>
-
+                <hr />
                 <div>
+                    <h1 className="title">SAVED MEMES</h1>
                     {savedMemes}
                 </div>
             </main>
